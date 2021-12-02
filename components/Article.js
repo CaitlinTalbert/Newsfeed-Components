@@ -86,6 +86,22 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  }, 
+  {
+    title: 'I AM THE BEST',
+    date: 'Jan 1st, 2019',
+    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
@@ -115,42 +131,48 @@ const data = [
   Refresh the page to see the new article.
 */
 
-function articleMaker (obj) {
+function articleMaker (articleObj) {
 
-  const article = document.createElement('div'); 
+  const articleWrapper = document.createElement('div'); 
   const articleTitle = document.createElement('h2'); 
-  const articleP1 = document.createElement('p1'); 
-  const articleP2 = document.createElement('p2'); 
-  const articleP3 = document.createElement('p3'); 
-  const articleSpan = document.createElement('span'); 
+  const articleDate = document.createElement('p'); 
+  const articleP1 = document.createElement('p'); 
+  const articleP2 = document.createElement('p'); 
+  const articleP3 = document.createElement('p'); 
+  const expandButton = document.createElement('span'); 
 
-  article.appendChild(articleTitle); 
-  article.appendChild(articleP1); 
-  article.appendChild(articleP2); 
-  article.appendChild(articleP3); 
-  article.appendChild(articleSpan); 
+  articleWrapper.classList.add('article'); 
+  articleDate.classList.add('date');  
+  expandButton.classList.add('expandButton');
 
-  article.classList.add('article'); 
-  articleP1.classList.add('date'); 
-  articleP2.classList.add('date'); 
-  articleP3.classList.add('date'); 
-  articleSpan.classList.add('expandButton'); 
+  articleWrapper.appendChild(articleTitle); 
+  articleWrapper.appendChild(articleDate); 
+  articleWrapper.appendChild(articleP1); 
+  articleWrapper.appendChild(articleP2); 
+  articleWrapper.appendChild(articleP3); 
+  articleWrapper.appendChild(expandButton); 
 
-  articleSpan.textContent = '+'
+  articleTitle.textContent = articleObj.title; 
+  articleDate.textContent = articleObj.date; 
+  articleP1.textContent = articleObj.firstParagraph; 
+  articleP2.textContent = articleObj.secondParagraph; 
+  articleP3.textContent = articleObj.thridParagraph; 
+  expandButton.textContent= '+'; 
 
-  const spanButton = document.querySelector('span.expandButton')
-  spanButton.addEventListener('click', ()=> {
-    article.classList.toggle('article-open'); 
-  }); 
+  expandButton.addEventListener('click', () => {
+    articleWrapper.classList.toggle('article-open'); 
+  })
 
-  return article;
+  return articleWrapper; 
 
 }
 
-const articleElements = data.map(data => {
-  return articleMaker(data); 
-}); 
+data.forEach(article => {
+  document.querySelector('div.articles').appendChild(articleMaker(article)); 
 
-articleElements.forEach(elem => {
-  articleElements.appendChild(elem); 
+  /**
+   * const articleWrapper = document.quertSelector('div.articles); 
+   * const articleList = articleMaker(article); 
+   * articleWrapper.appendChild(articleList); 
+   */
 }); 
