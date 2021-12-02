@@ -62,27 +62,31 @@ let menuItems = [
   */
 
 
-  const menuMaker = menuArr => {
-    const menuDiv = document.createElement('div'); 
-    const ul = document.createElement('ul'); 
+  function menuMaker(linksArray) {
+    const menuWrapper = document.createElement('div'); 
+    const menuList = document.createElement('ul'); 
 
-    menuArr.forEach(item => {
-      const li = document.createElement('li'); 
-      li.textContent = item; 
-      ul.appendChild(li); 
-    }); 
+    menuWrapper.appendChild(menuList); 
 
-    menuDiv.appendChild(ul); 
+    menuWrapper.classList.add('menu'); 
 
-    menuDiv.classList.add('menu'); 
-
-    const menuBtn = document.querySelector('.menu-button'); 
-    menuBtn.addEventListener('click', () => {
-      menuDiv.classList.toggle('menu-open'); 
+    linksArray.forEach(linkText => {
+      const link = document.createElement('li');
+      link.textContent = linkText; 
+      menuList.appendChild(link); 
     })
-    return menuDiv; 
+
+    const hamMenu = document.querySelector('.menu-button'); 
+
+    hamMenu.addEventListener('click', () => {
+      menuWrapper.classList.toggle('menu--open'); 
+    })
+
+    return menuWrapper; 
   }
 
-  const newMenu = menuMaker(menuItems); 
-  const header = document.querySelector('.header'); 
-  header.appendChild(newMenu); 
+  console.log(menuMaker(menuItems)); 
+
+  document.querySelector('.header').appendChild(menuMaker(menuItems)); 
+  
+
