@@ -86,6 +86,22 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  }, 
+  {
+    title: 'I AM THE BEST',
+    date: 'Jan 1st, 2019',
+    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
@@ -114,3 +130,49 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+function articleMaker (articleObj) {
+
+  const articleWrapper = document.createElement('div'); 
+  const articleTitle = document.createElement('h2'); 
+  const articleDate = document.createElement('p'); 
+  const articleP1 = document.createElement('p'); 
+  const articleP2 = document.createElement('p'); 
+  const articleP3 = document.createElement('p'); 
+  const expandButton = document.createElement('span'); 
+
+  articleWrapper.classList.add('article'); 
+  articleDate.classList.add('date');  
+  expandButton.classList.add('expandButton');
+
+  articleWrapper.appendChild(articleTitle); 
+  articleWrapper.appendChild(articleDate); 
+  articleWrapper.appendChild(articleP1); 
+  articleWrapper.appendChild(articleP2); 
+  articleWrapper.appendChild(articleP3); 
+  articleWrapper.appendChild(expandButton); 
+
+  articleTitle.textContent = articleObj.title; 
+  articleDate.textContent = articleObj.date; 
+  articleP1.textContent = articleObj.firstParagraph; 
+  articleP2.textContent = articleObj.secondParagraph; 
+  articleP3.textContent = articleObj.thridParagraph; 
+  expandButton.textContent= '+'; 
+
+  expandButton.addEventListener('click', () => {
+    articleWrapper.classList.toggle('article-open'); 
+  })
+
+  return articleWrapper; 
+
+}
+
+data.forEach(article => {
+  document.querySelector('div.articles').appendChild(articleMaker(article)); 
+
+  /**
+   * const articleWrapper = document.quertSelector('div.articles); 
+   * const articleList = articleMaker(article); 
+   * articleWrapper.appendChild(articleList); 
+   */
+}); 
